@@ -172,12 +172,3 @@ If GitHub complains about file size:
 * Compare more models (XGBoost / LightGBM)
 * Save trained models (`joblib` for sklearn, `.keras` for TensorFlow)
 
----
-
-## Author
-
-Built and experimented in `IC_ML_01.ipynb`.
-
-```
-
-#
