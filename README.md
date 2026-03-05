@@ -1,174 +1,207 @@
+Weather Prediction with Machine Learning & LSTM
 
-````md
-# Weather ML Notebook (Classification + Regression + LSTM)
+A machine learning project that explores historical weather data to perform classification, regression, and time-series forecasting using classical ML models and deep learning.
 
-This project explores a weather dataset and trains multiple models for:
+The project demonstrates how weather data can be processed, analyzed, and modeled to predict temperature and precipitation patterns using Scikit-Learn and TensorFlow.
 
-- **Classification:** Predicting **Precip Type** (rain vs snow)
-- **Regression:** Predicting **Temperature (C)** using classic ML
-- **Time-series Regression (Deep Learning)** : Predicting **Temperature (C)** using an **LSTM** model
+Project Overview
 
-All experiments are contained in the notebook: **`IC_ML_01.ipynb`**.
+This project investigates a historical weather dataset and applies multiple machine learning techniques to extract patterns and build predictive models.
 
----
+Three modeling tasks are explored:
 
-## Project Files
+1. Classification
 
-- `IC_ML_01.ipynb` — Main notebook (EDA + preprocessing + models + evaluation + plots)
-- `weatherHistory.csv` — Weather dataset used by the notebook
+Predict the type of precipitation (rain or snow).
 
----
+2. Regression
 
-## Dataset Overview
+Predict the temperature (°C) using traditional regression models.
 
-The dataset contains hourly weather observations with columns such as:
+3. Time Series Forecasting
 
-- `Formatted Date`
-- `Summary`
-- `Precip Type`
-- `Temperature (C)`
-- `Apparent Temperature (C)`
-- `Humidity`
-- `Wind Speed (km/h)`
-- `Wind Bearing (degrees)`
-- `Visibility (km)`
-- `Pressure (millibars)`
-- (and others like `Loud Cover`, `Daily Summary`)
+Predict future temperature values using an LSTM neural network designed for sequential data.
 
----
+Dataset
 
-## Notebook Workflow (What happens inside)
+The dataset contains hourly weather observations including atmospheric and environmental variables.
 
-### 1) Load Data
-The notebook loads data using:
-```python
-weather = pd.read_csv(r'weatherHistory.csv')
-````
+Key Features
+Feature	Description
+Formatted Date	Timestamp of weather observation
+Temperature (C)	Recorded temperature
+Apparent Temperature (C)	Feels-like temperature
+Humidity	Relative humidity
+Wind Speed (km/h)	Wind speed
+Wind Bearing (degrees)	Wind direction
+Visibility (km)	Visibility distance
+Pressure (millibars)	Atmospheric pressure
+Precip Type	Type of precipitation (rain or snow)
+Summary	Short weather description
 
-### 2) Cleaning + Feature Engineering
+The dataset used:
 
-* Converts `Formatted Date` to datetime
-* Extracts:
+weatherHistory.csv
+Project Structure
+weather-ml-project/
+|
+|__ archive.zip           # zip files
+├── IC_ML_01.ipynb        # Main machine learning notebook
+├── weatherHistory.csv    # Weather dataset
+└── README.md             # Project documentation
+Workflow
 
-  * `year`, `month`, `day`, `hour`
-* Drops columns that are not needed:
+The notebook follows a standard machine learning pipeline.
 
-  * `Loud Cover`
-  * `Daily Summary`
-* Handles missing values in `Precip Type` (fills missing as `"rain"`)
-* Encodes `Precip Type`:
+1. Data Loading
 
-  * `rain -> 1`
-  * `snow -> 0`
+The dataset is loaded using Pandas.
 
-### 3) Outlier Check (Wind Speed)
-
-The notebook checks outliers visually with a boxplot and decides to keep them.
-
-### 4) Classification Task (Precip Type)
-
-Target:
-
-* `y_c = weather['Precip Type']`
-
-Features:
-
-* `x_c = weather.drop(columns=['Precip Type'])`
-* Some columns are later dropped (e.g. date parts / summary) to focus on numeric predictors.
-
-Models used:
-
-* **Logistic Regression**
-* **Random Forest Classifier**
-
-Evaluation includes:
-
-* accuracy
-* precision / recall / f1
-* classification report
-
-### 5) Regression Task (Temperature)
-
-Target:
-
-* `y_r = weather['Temperature (C)']`
-
-Features:
-
-* `x_r = weather.drop(columns=['Temperature (C)', 'Summary'])`
-
-Models used:
-
-* **Linear Regression**
-* **Random Forest Regressor**
-
-Evaluation includes:
-
-* Mean Squared Error (MSE)
-
-### 6) Time-Series Regression (LSTM)
-
-Uses TensorFlow/Keras and:
-
-* `timeseries_dataset_from_array(...)`
-* Builds an **LSTM -> Dense(1)** model to predict future temperature values.
-
----
-
-## Requirements
-
-Recommended Python: **3.9+**
-
-Install dependencies:
-
-```bash
-pip install numpy pandas matplotlib seaborn scikit-learn tensorflow
-```
-
-> Note: TensorFlow installation depends on your machine (CPU vs GPU). If TensorFlow gives issues, install the CPU version for stability.
-
----
-
-## How to Run
-
-1. Clone repo / download files
-2. Make sure `weatherHistory.csv` is in the same folder as `IC_ML_01.ipynb`
-3. Launch Jupyter:
-
-```bash
-jupyter notebook
-```
-
-4. Open `IC_ML_01.ipynb` and run all cells.
-
----
-
-## Notes / Common Issues
-
-### Path issues
-
-If your notebook can’t find the CSV, confirm:
-
-* the CSV file is in the same directory
-* or update the path in:
-
-```python
 pd.read_csv("weatherHistory.csv")
-```
+2. Data Cleaning
 
-### Large CSV in GitHub
+The following preprocessing steps were applied:
 
-If GitHub complains about file size:
+Converted Formatted Date into datetime format
 
-* use **Git LFS**
-* or upload dataset to Google Drive/Kaggle and keep only a download link in the README.
+Extracted time features:
 
----
+year
 
-## Next Improvements (Optional Ideas)
+month
 
-* Use proper preprocessing pipeline (OneHotEncoder for `Summary`, scaling for numeric)
-* Add train/validation split for LSTM (and plot loss curves)
-* Compare more models (XGBoost / LightGBM)
-* Save trained models (`joblib` for sklearn, `.keras` for TensorFlow)
+day
 
+hour
+
+Removed irrelevant columns:
+
+Loud Cover
+
+Daily Summary
+
+Handled missing values in Precip Type
+
+Encoded precipitation labels:
+
+rain → 1
+
+snow → 0
+
+3. Exploratory Data Analysis
+
+Basic EDA was performed to understand:
+
+feature distributions
+
+outliers
+
+correlations between weather variables
+
+A boxplot was used to inspect outliers in Wind Speed.
+
+Machine Learning Models
+Classification Models
+
+Goal: Predict precipitation type.
+
+Models used:
+
+Logistic Regression
+
+Random Forest Classifier
+
+Evaluation metrics:
+
+Accuracy
+
+Precision
+
+Recall
+
+F1 Score
+
+Classification Report
+
+Regression Models
+
+Goal: Predict temperature (°C).
+
+Models used:
+
+Linear Regression
+
+Random Forest Regressor
+
+Evaluation metric:
+
+Mean Squared Error (MSE)
+
+Deep Learning Model
+
+For time-series prediction, an LSTM (Long Short-Term Memory) network was implemented using TensorFlow / Keras.
+
+Model Architecture
+LSTM
+ ↓
+Dense Layer
+ ↓
+Temperature Prediction
+
+The model was trained using sequences generated with:
+
+timeseries_dataset_from_array()
+
+This allows the model to learn patterns from sequential weather observations.
+
+Technologies Used
+Tool	Purpose
+Python	Core programming language
+Pandas	Data manipulation
+NumPy	Numerical operations
+Matplotlib	Data visualization
+Seaborn	Statistical visualization
+Scikit-Learn	Machine learning models
+TensorFlow / Keras	Deep learning (LSTM)
+Installation
+
+Install required dependencies:
+
+pip install numpy pandas matplotlib seaborn scikit-learn tensorflow
+Running the Project
+
+Clone the repository
+
+git clone <repo-url>
+
+Navigate to the project folder
+
+cd weather-ml-project
+
+Launch Jupyter Notebook
+
+jupyter notebook
+
+Open
+
+IC_ML_01.ipynb
+
+Run all cells to reproduce the results.
+
+Future Improvements
+
+Possible extensions to the project include:
+
+Hyperparameter tuning for models
+
+Feature scaling and advanced preprocessing pipelines
+
+Incorporating additional weather datasets
+
+Deploying the model as an API
+
+Building a dashboard for temperature forecasting
+
+Author
+
+Machine Learning experiment exploring classification, regression, and time-series forecasting using weather data.
