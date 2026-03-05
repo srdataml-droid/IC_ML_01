@@ -180,27 +180,4 @@ Built and experimented in `IC_ML_01.ipynb`.
 
 ```
 
----
-
-## ✅ “Should I make a CSV for the ipynb?”
-
-Yes — **keep the CSV separate** (the way you already have it). That’s the normal, correct workflow.
-
-Here’s the rule of thumb:
-
-- **Notebook (`.ipynb`)** = your experiments + code + plots  
-- **CSV (`.csv`)** = your dataset input  
-- Keeping them separate makes your project reproducible and clean.
-
-### When you *might not* commit the CSV
-If the CSV is **too large for GitHub**, do one of these:
-
-- Use **Git LFS** (best if you must keep it in repo)
-- Or **don’t upload the CSV**, and instead:
-  - add a link to Kaggle/Drive in the README
-  - and add `weatherHistory.csv` to `.gitignore`
-
----
-
-If you want, I can also generate a clean `.gitignore` for this project (Jupyter + Python + dataset files) and a short “dataset download” section for your README.
-```
+#
