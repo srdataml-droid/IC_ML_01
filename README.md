@@ -245,5 +245,3 @@ Possible extensions to the project include:
 Machine Learning experiment exploring **classification, regression, and time-series forecasting using weather data**.
 
 ---
-
-## One small engineering tip (from experience)vel ML project instead of a beginner notebook.**
