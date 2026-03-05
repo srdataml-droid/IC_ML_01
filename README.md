@@ -1,12 +1,11 @@
 
-
 ````md
 # Weather ML Notebook (Classification + Regression + LSTM)
 
 This project explores a weather dataset and trains multiple models for:
 
-- **Classification** : Predicting **Precip Type** (rain vs snow)
-- **Regression** : Predicting **Temperature (C)** using classic ML
+- **Classification:** Predicting **Precip Type** (rain vs snow)
+- **Regression:** Predicting **Temperature (C)** using classic ML
 - **Time-series Regression (Deep Learning)** : Predicting **Temperature (C)** using an **LSTM** model
 
 All experiments are contained in the notebook: **`IC_ML_01.ipynb`**.
